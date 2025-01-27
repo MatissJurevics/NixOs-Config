@@ -53,6 +53,24 @@
     LC_TIME = "ko_KR.UTF-8";
   };
 
+  # TLP settings
+  services.tlp = {
+  enable = true;
+  settings = {
+    CPU_SCALING_GOVERNOR_ON_AC = "performance";
+    CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+    CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+    CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+    CPU_MIN_PERF_ON_AC = 0;
+    CPU_MAX_PERF_ON_AC = 100;
+    CPU_MIN_PERF_ON_BAT = 0;
+    CPU_MAX_PERF_ON_BAT = 20;
+  };
+};
+
+services.power-profiles-daemon.enable = false;
+
+
   boot.loader.grub.theme = pkgs.stdenv.mkDerivation {
   pname = "distro-grub-themes";
   version = "3.1";
@@ -157,6 +175,9 @@
 	unzip
 	quickemu
 	ollama
+	alacritty
+	python314
+	tlp
 ];
 
 	
@@ -194,4 +215,3 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.11"; # Did you read the comment?
 }
-
