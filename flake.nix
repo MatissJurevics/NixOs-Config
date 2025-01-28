@@ -1,20 +1,22 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nvf.url = "github:notelf/nvf";
+    nvf.url = "github:notashelf/nvf";
   };
 
-  outputs = { self, nixpkgs, nvf, ... } @inputs: 
-    let
-      system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
-    in {
-      packages.${system} = {
-        nvf = nvf.lib.${system}.makeNixvim {
-          modules = [ ./nvf-configuration.nix ];
-        };
-        default = self.packages.${system}.nvf;
-      };
+  outputs = { self, nixpkgs, nvf, ... }: {
+    packages."x86_64-linux".default = 
+    (nvf.lib.neovimConfiguration {
+	pkgs = nixpkgs.legacyPackages."x86_64-linux";
+	modules = ["nvf-configuration.nix"];
+    }).neovim;
+
+    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+      modules = [
+        ./configuration.nix
+	nvf.nixosModules.default
+      ];
     };
+  }; 
 }
 
