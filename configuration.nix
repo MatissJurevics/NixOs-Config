@@ -9,7 +9,8 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+	./hardware-configuration.nix
+	./nordvpn.nix
     ];
 
   # Bootloader.
@@ -26,6 +27,8 @@
 
   networking.hostName = "nixos"; # Define your hostname.
 
+
+  myypo.services.custom.nordvpn.enable = true;
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -140,12 +143,17 @@ services.power-profiles-daemon.enable = false;
   users.users.matissj = {
     isNormalUser = true;
     description = "Matiss Jurevics";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "nordvpn"];
     packages = with pkgs; [
     #  thunderbird
     ];
   };
-
+  users.groups.nordvpn = {}; 
+  systemd.services.nordvpn.serviceConfig = {
+    RuntimeDirectory = "nordvpn";
+    RuntimeDirectoryMode = "0750"; # Ensure group access
+    Group = "nordvpn";
+  };
   # Install firefox.
   programs.firefox.enable = true;
 
@@ -178,6 +186,9 @@ services.power-profiles-daemon.enable = false;
 	alacritty
 	python314
 	tlp
+	gfn-electron
+	prismlauncher
+	figma-linux
 ];
 
 	
