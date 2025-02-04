@@ -87,10 +87,7 @@
   services.fprintd = {
 	enable = true;
 	package = pkgs.fprintd-tod;
-	tod.enable = true;
-	tod.driver = pkgs.libfprint-2-tod1-elan;
   };
-  #  nix.settings.experimental-features = [“nix-command”];
   nix.settings.auto-optimise-store = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 # Configure keymap in X11
@@ -158,7 +155,9 @@
 	element-desktop
 	bitwarden-desktop
 	bun
-	fish
+        discord
+        spotify
+        fish
 	appimage-run
 	ani-cli
 	fprintd
@@ -169,12 +168,14 @@
 	quickemu
 	ollama
 	alacritty
-	python314
-	tlp
+	python312Full
+        tlp
+        qbittorrent
 	gfn-electron
 	prismlauncher
 	figma-linux
-];
+        code-cursor
+        ];
 
 	
 

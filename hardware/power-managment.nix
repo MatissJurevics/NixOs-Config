@@ -13,15 +13,15 @@
       CPU_MIN_PERF_ON_AC = 0;
       CPU_MAX_PERF_ON_AC = 100;
       CPU_MIN_PERF_ON_BAT = 0;
-      CPU_MAX_PERF_ON_BAT = 50;  # Limits max CPU performance on battery
+      CPU_MAX_PERF_ON_BAT = 30;  # Limits max CPU performance on battery
 
       # Platform Power Profile
       PLATFORM_PROFILE_ON_AC = "performance";
       PLATFORM_PROFILE_ON_BAT = "low-power";
 
       # Battery Protection
-      START_CHARGE_THRESH_BAT0 = 75;    # Start charging at 75%
-      STOP_CHARGE_THRESH_BAT0 = 80;     # Stop charging at 80%
+      START_CHARGE_THRESH_BAT0 = 90;    # Start charging at 90%
+      STOP_CHARGE_THRESH_BAT0 = 100;     # Stop charging at 100%
       RESTORE_THRESHOLDS_ON_BAT = 1;
 
       # PCIe Active State Power Management
